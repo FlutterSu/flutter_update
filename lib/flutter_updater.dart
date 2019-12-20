@@ -76,6 +76,7 @@ class FlutterUpdater {
   Future<void> download(
       {@required String url,bool forceCover,
       @required String savePath,
+      Function(dynamic) onFailure,
       Function(dynamic) callback}) async {
     if (Platform.isAndroid) {
       final extension = p.extension(url);
@@ -104,9 +105,10 @@ class FlutterUpdater {
         }
       }, done: () async {
         print("下载1完成");
-        callback(await install(fileRealPath));
+        callback?.call(await install(fileRealPath));
       }, failed: (e) {
         print("下载1失败：" + e.toString());
+        onFailure?.call(e);
       });
     }
   }
