@@ -81,7 +81,7 @@ class FlutterUpdater {
     if (Platform.isAndroid) {
       final extension = p.extension(url);
       final fileName = p.basenameWithoutExtension(url);
-      var fileRealPath = "$savePath/$fileName.$extension";
+      var fileRealPath = "$savePath/$fileName$extension";
       File file = File(savePath);
       if (!await file.exists()) {
         new Directory(savePath).createSync();
